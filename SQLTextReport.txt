@@ -1,0 +1,41 @@
+SQL server:It is a relational database management system
+
+DBMS:It is a dataManagment system it a software used to mannage the database
+constraints:
+null:-A null value cannot be stored in the column
+unique:- the value in the column is diffrent
+check :-All the values in the column should be satisfy with the condition
+default :- It consist of set of default values for the column when no value is specified
+Index : it is used to retriving the data from database
+  
+Creating a table :-
+CREATE TABLE Employeedetails3
+(
+EmpId int,
+EmpName varchar(20),
+EmpphoneNumber int,
+EmpSalary int,
+Empemail varchar(20),
+EmpAddres varchar(50),
+Empcity varchar(15),
+Empdist varchar(20),
+Empcountry varchar(15)
+PRIMARY KEY(EmpId)
+);
+INSERT INTO Employeedetails3 (EmpId,EmpName,EmpphoneNumber,EmpSalary,Empemail,EmpAddres,Empcity,Empdist,Empcountry)
+ VALUES('1','sameer','8088692','20000','sameer1@gmail.com','santrashwadi','Kalabrugi','kalaburgi','INDIA');
+INSERT INTO Employeedetails3 VALUES('2','Ramesh','6935478','15000','Ramesh2@gamil.com','Vijayanagara','Bangalore','Bangalore','INDIA');
+SELECT DISTINCT Empcity from Employeedetails3
+
+SELECT * FROM Employeedetails3
+
+Display details:-
+
+->select * from TableName
+->DROP TABLE:-Drop table tablename
+->drop database:-drop  database tablename
+->ADDtable:-Alter table tablename ADD xyzname varchar();
+->drop column:-Alter table tablename drop column xyzname;
+->select DISTINCT CITYNAME FROM TABLENAME
+->Truncate :- delete the information from the table:-Truncate  table tablename
+->Insert :insert the values into table :-Insert into tableName values();
