@@ -1,3 +1,4 @@
+18/10/22
 SQL server:It is a relational database management system
 
 DBMS:It is a dataManagment system it a software used to mannage the database
@@ -39,3 +40,56 @@ Display details:-
 ->select DISTINCT CITYNAME FROM TABLENAME
 ->Truncate :- delete the information from the table:-Truncate  table tablename
 ->Insert :insert the values into table :-Insert into tableName values();
+
+19/10/22
+->What is a NULL Value?
+A field with a NULL value is a field with no value
+If a field in a table is optional it is possible to insert a new record or update a record without adding a value to this field 
+Then, the field will be saved with a NULL value.
+
+->IS NULL Syntax:-
+SELECT columnnames
+FROM tablename
+WHERE columnname IS NULL;
+
+->IS NOT NULL Syntax
+SELECT columnnames
+FROM tablename
+WHERE columnname IS NOT NULL;
+
+->Constraints:- The rule given  for the column for validation
+*)Unique :-It is used to avoid the duplicate values into the coloum
+->CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(25) NOT NULL,
+    FirstName varchar(25),
+    Age int,
+    CONSTRAINT UC_Person UNIQUE (ID,LastName)
+);
+*)Not null:-It is used to avoid null values
+
+->ALTER TABLE Persons
+ALTER COLUMN Age int NOT NULL;
+
+*)check :-It is a extra validation with a condition 
+->CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(20) NOT NULL,
+    FirstName varchar(250),
+    Age int,
+    City varchar(10),
+    CONSTRAINT CHK_Person CHECK (Age>=18 AND City='')
+);
+if the condtion  is satisfied the value is accepted else  it will be rejected 
+*)Primary key:-It is a constraints  which is used to identyfy  a records uniquely from the table
+->CREATE TABLE Persons (
+    ID int NOT NULL PRIMARY KEY,
+    LastName varchar(20) NOT NULL,
+    FirstName varchar(20),
+    Age int
+);
+->forenkey:-
+*) FOREIGN KEY is a field in one table that refers to the PRIMARY KEY in another table.
+
+->The table with the foreign key is called the child table and the table with the primary key is called the referenced or parent table.
+
