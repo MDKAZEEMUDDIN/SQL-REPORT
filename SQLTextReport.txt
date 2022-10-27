@@ -171,7 +171,101 @@ on (employee.DeptID = deptManager.DeptID)
 left join Employees Manager
 On ( Manager.EmployeeID=deptManager.ManagerID)
 
-And 3:0 session taken by @Bhushan chandrashekar about Right joins ,self join,inner join,cross join
+And 3:00pm session taken by @Bhushan chandrashekar about Right joins ,self join,inner join,cross join
+
+27/10/22
+Today i gown through store procedure Insert ,update ,delete
+create  table UserDetails
+(
+User_Id int primary key identity(1,1) not null,
+User_Name varchar(20) not null,
+User_age int not null
+
+);
+insert into UserDetails values('Amar',23)
+insert into UserDetails values('kiran',28)
+insert into UserDetails values('pavan',25)
+insert into UserDetails values('Manoj',22)
+
+
+create table EmployeDetail
+(
+Emp1_id int primary key not null,
+Emp1_name varchar(20) not null,
+Emp1_age int not null
+)
+insert into EmployeDetail values(1,'sameer',36)
+insert into EmployeDetail values(2,'Akash',45)
+insert into EmployeDetail values(3,'prabhu',30)
+insert into EmployeDetail values(4,'kiran',28)
+insert into EmployeDetail values(5,'aveez',22)
+select * from UserDetails
+select * from EmployeDetail
+create table Employedetail2
+(
+Emp2_id int primary key not null,
+Emp2_name varchar(20) not null,
+Emp2_age int not null ,
+userid int foreign key references UserDetails(User_Id),
+Empid int foreign key references EmployeDetail(Emp1_id)
+)
+insert into Employedetail2 values(1,'samreen',20,1,1)
+insert into Employedetail2 values(2,'kk',25,2,2)
+insert into Employedetail2 values(3,'hitesh',18,3,3)
+insert into Employedetail2 values(4,'sam',15,4,4)
+
+select * from UserDetails
+select * from EmployeDetail
+select * from Employedetail2
+
+CREATE PROCEDURE SPINSERTDATA
+ (
+ @U_NAME VARCHAR(20),
+ @U_AGE INT
+ )
+ AS
+   BEGIN
+     INSERT INTO UserDetails(User_Name,User_age) VALUES(@U_NAME,@U_AGE);
+   END
+   
+
+  CREATE PROCEDURE SPUPDATE
+  (
+  @U_ID INT,
+  @U_NAME VARCHAR(20),
+  @U_AGE INT
+  )
+  AS
+  BEGIN
+  SET NOCOUNT ON;
+  UPDATE UserDetails 
+  SET User_Name=@U_NAME,
+  User_age=@U_AGE
+  where User_Id=@U_ID
+  end
+  CREATE PROCEDURE SPDELETE
+  (
+  @id int
+  )
+  AS
+  BEGIN
+  DELETE FROM UserDetails
+  where User_Id=@id
+  end
+  -----creating view -----------------
+  CREATE VIEW RetriveUserDetails
+  AS
+  
+   select userdetails.USER_ID,userdetails.User_Name,User_age,Employedetail2.Emp2_id
+   from Employedetail2
+   inner join UserDetails on Employedetail2.userid=UserDetails.User_Id
+   inner join EmployeDetail on Employedetail2.EmpId=EmployeDetail.Emp1_id
+
+And session taken by Rajiv Ravichandran at 3.30pm  about store procedure and session taken by @Bhushan Chandrashekhar Kolapkar about view procedure at 5.30pm 
+   
+
+ 
+
 
 
 
