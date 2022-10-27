@@ -128,5 +128,52 @@ FULL OUTER JOIN table2
 ON table1.column_name = table2.column_name
 WHERE condition;
 
+26/10/22
+Inner joins creating table 3 table using foren key 
+
+create table Dept (
+   DeptID int primary key,
+   Name varchar(100),
+)
+ 
+create table Employees (
+   EmployeeID int primary key,
+   Name varchar(100),
+   DeptID int null,
+   CONSTRAINT FK_Employees_DeptID   FOREIGN KEY (DeptID) REFERENCES Dept (DeptID)
+);
+create table DeptManager (
+   DeptID int ,
+   ManagerID int,
+   primary key (DeptID, ManagerID),
+   CONSTRAINT FK_DeptManager_DeptID   FOREIGN KEY (DeptID) REFERENCES Dept (DeptID),
+   CONSTRAINT FK_DeptManager_ManagerID   FOREIGN KEY (ManagerID) REFERENCES Employees (EmployeeID)
+)
+select * from Dept
+select * from Employees
+select * from DeptManager
+ 
+insert into Dept Values(1,'Excutive')
+insert into Dept Values(2,'HR')
+ insert into Employees Values(1,'Kevin ',1)
+insert into Employees Values(2,'Akshay',1)
+insert into Employees Values(3,'Sandeep',2)
+insert into Employees Values(4,'Swati',2)
+insert into Employees Values(5,'Sunil',2)
+ insert into DeptManager Values(1,1)
+insert into DeptManager Values(2,2)
+Select employee.EmployeeID,employee.Name, dept.Name, manager.EmployeeID as ManagerID, manager.Name As Manager
+from Employees employee
+left join Dept dept
+on (employee.DeptID =dept.DeptID)
+left join DeptManager deptManager
+on (employee.DeptID = deptManager.DeptID)
+left join Employees Manager
+On ( Manager.EmployeeID=deptManager.ManagerID)
+
+And 3:0 session taken by @Bhushan chandrashekar about Right joins ,self join,inner join,cross join
+
+
+
 
 
