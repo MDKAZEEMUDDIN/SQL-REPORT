@@ -262,6 +262,135 @@ CREATE PROCEDURE SPINSERTDATA
    inner join EmployeDetail on Employedetail2.EmpId=EmployeDetail.Emp1_id
 
 And session taken by Rajiv Ravichandran at 3.30pm  about store procedure and session taken by @Bhushan Chandrashekhar Kolapkar about view procedure at 5.30pm 
+28/10/22
+
+->Function:-Functions are methods used to perform data operatFor example:-SELECT LCASE(StudentName)
+FROM Students;ions. SQL has many in-built functions used to perform string concatenations, mathematical calculations etc
+Scalar function :-The Scalar Functions in SQL are used to return a single value from the given input value
+Syntax:
+
+SELECT LCASE(ColumnName)
+FROM TableName;
+->for example:-SELECT UCASE(ColumnName)
+FROM TableName;
+->synatx:-
+SELECT UCASE(ColumnName)
+FROM TableName;
+for example:-SELECT UCASE(StudentName)
+FROM Students;
+Inline Table value function:-
+->Inline function return the table 
+->It doesnot have beigb and end int the table 
+for example:-
+CREATE TABLE Student
+(
+  ID INT PRIMARY KEY,
+  Name VARCHAR(50),
+  Gender VARCHAR(50),
+  DOB DATETIME,
+  Branch VARCHAR(50)
+)
+
+INSERT INTO Student VALUES(1, 'Pranaya', 'Male','1996-02-29 10:53:27.060', 'CSE')
+INSERT INTO Student VALUES(2, 'Priyanka', 'Female','1995-05-25 10:53:27.060', 'CSE')
+INSERT INTO Student VALUES(3, 'Anurag', 'Male','1995-04-19 10:53:27.060', 'EC')
+INSERT INTO Student VALUES(4, 'Preety', 'Female','1996-03-17 10:53:27.060', 'EC')
+INSERT INTO Student VALUES(5, 'Sambit', 'Male','1997-01-15 10:53:27.060', 'CSE')
+Example:-CREATE FUNCTION FN_GetStudentDetailsByID
+(
+  @ID INT
+)
+RETURNS TABLE
+AS
+RETURN (SELECT * FROM Student WHERE ID = @ID)
+
+->CREATE FUNCTION FN_GetStudentDetailsByBranch
+(
+  @Branch VARCHAR(50)
+)
+RETURNS TABLE
+AS
+RETURN (SELECT * FROM Student WHERE Branch = @Branch)
+
+->Multistatement table value function:-The Multi-Statement Table Valued Function in SQL Server is the same as the Inline Table-Valued Function means 
+it is also going to returns a table as an output but with the following differences The Multi-Statement Table-Valued Function body can contain more than one statement.
+ In Inline Table-Valued Function, it contains only a single Select statement prepared by the return statement.
+In Multi-Statement Table-Valued Function, the structure of the table returned from the function is defined by us But in Inline Table-Valued Function
+ the structure of the table is defined by the Select statement that is going to return from the function body.
+for example:-
+-- Create Department Table
+CREATE TABLE Department
+(
+  ID INT PRIMARY KEY,
+  DepartmentName VARCHAR(50)
+)
+GO
+-- Populate the Department Table with test data
+INSERT INTO Department VALUES(1, 'IT')
+INSERT INTO Department VALUES(2, 'HR')
+INSERT INTO Department VALUES(3, 'Sales')
+GO
+-- Create Employee Table
+CREATE TABLE Employee
+(
+  ID INT PRIMARY KEY,
+  Name VARCHAR(50),
+  Gender VARCHAR(50),
+  DOB DATETIME,
+  DeptID INT FOREIGN KEY REFERENCES Department(ID) 
+)
+GO
+-- Populate the Employee Table with test data
+INSERT INTO Employee VALUES(1, 'Pranaya', 'Male','1996-02-29 10:53:27.060', 1)
+INSERT INTO Employee VALUES(2, 'Priyanka', 'Female','1995-05-25 10:53:27.060', 2)
+INSERT INTO Employee VALUES(3, 'Anurag', 'Male','1995-04-19 10:53:27.060', 2)
+INSERT INTO Employee VALUES(4, 'Preety', 'Female','1996-03-17 10:53:27.060', 3)
+INSERT INTO Employee VALUES(5, 'Sambit', 'Male','1997-01-15 10:53:27.060', 1)
+INSERT INTO Employee VALUES(6, 'Hina', 'Female','1995-07-12 10:53:27.060', 2)
+GO
+->-- Inline Table Valued function:
+CREATE FUNCTION ILTVF_GetEmployees()
+RETURNS TABLE
+AS
+RETURN (SELECT ID, Name, Cast(DOB AS Date) AS DOB
+        FROM Employee)
+------------- multistatement Table Valued function:
+CREATE FUNCTION MSTVF_GetEmployees()
+RETURNS @Table Table (ID int, Name nvarchar(20), DOB Date)
+AS
+BEGIN
+  INSERT INTO @Table
+    SELECT ID, Name, Cast(DOB AS Date)
+    FROM Employee
+  Return
+End
+
+31/10/22
+->I have gown through diffrence b/w scalar,inline,multistatement table value function
+scalar function will return only scalar value 
+->Inline table value fuction return clause cannot contain structure of the table the function return
+->inline cannot have begings and end block 
+->inline value function are better performance
+->it is possible to update the underline table using inline value function
+->multistatement table vale fn use specify the structure of the table that gets return 
+->multiple can have begins and end block
+->multiple statemnet value table fn if we given task can be achived using inline fn always perfer to use them multuplestatment  value fn
+->but not possible using multi statemnet table value fn
+-
+->5:30 session taken by bhushanc kolapkar about collection 
+-> i have gown through some of the topic like Array, list 
+
+
+
+
+
+
+
+
+
+
+
+
    
 
  
